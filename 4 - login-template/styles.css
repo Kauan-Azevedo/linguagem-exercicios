@@ -41,7 +41,7 @@ ul {
 .cadastro .cadastro-form label {
     display: flex;
     flex-direction: column;
-    position: relative  ;
+    position: relative;
 }
 
 .cadastro .cadastro-form label span {
@@ -72,7 +72,8 @@ ul {
 
 :is(
     .cadastro .cadastro-form label input:valid + span,
-    .cadastro .cadastro-form label:hover input + span
+    .cadastro .cadastro-form label:hover input + span,
+    .cadastro .cadastro-form label input:focus + span
 ) {
     bottom: 90%;
     font-size: .7rem;
