@@ -1,23 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login template</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">
 </head>
 <body>
     <main>
         <section class="cadastro">
-            <h1>Página de login</h1>
-            <form class="cadastro-form" action="./index.html">
+            <h1>Página de cadastro</h1>
+            <form class="cadastro-form" action="/index.html">
                 <label for="nome">
                     <input type="text" name="nome" required autocomplete="off">
-                    <span>nome</span>
+                    <span>Nome</span>
                 </label>
                 <label for="senha">
                     <input type="password" name="senha" required>
-                    <span>senha</span>
+                    <span>Senha</span>
+                </label>
+                <label for="email">
+                    <input type="email" name="email" required>
+                    <span>Email</span>
+                </label>
+                <label for="dataNascimento">
+                    <input type="date" name="dataNascimento" required>
                 </label>
                 <div class="cadastro-form__opcoes">
                     <button class="botao_limpar" type="reset">Limpar</button>
@@ -26,6 +33,6 @@
             </form>
         </section>
     </main>
-    <script src="./index.js"></script>
+    <script src="/js/home.js"></script>
 </body>
 </html>

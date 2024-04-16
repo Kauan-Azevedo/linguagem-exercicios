@@ -40,13 +40,14 @@ function add_local_data(data) {
         const local_data = get_local_data();
 
         local_data.push(...data);
-        
-        console.table(local_data)
+
         set_local_data(local_data);
     }
     catch (error) {
         return display_error(error.message);
     }
+
+    window.location = "./pages/users_list.html"
 }
 
 function display_error(error) {
@@ -57,10 +58,6 @@ function display_error(error) {
     form.appendChild(error_message);
 }
 
-function validade_form_data(data, local) {
-    // TODO: VALIDAR DADOS A SEREM CADASTRADOS COM OS DADOS JA EXISTENTES NO LOCAL STORAGE
-
-}
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
