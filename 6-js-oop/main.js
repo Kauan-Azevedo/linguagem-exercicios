@@ -71,8 +71,62 @@ class Livro {
     }
 }
 
-const meuLivro = new Livro("A volta dos que n foram", "Eu", "Eu LTDA", 2005);
-console.log(meuLivro.toString())
-meuLivro.titulo = "A volta dos que não foram"
-meuLivro.editora = "Google"
-console.table({meuLivro})
+// const meuLivro = new Livro("A volta dos que n foram", "Eu", "Eu LTDA", 2005);
+// console.log(meuLivro.toString())
+// meuLivro.titulo = "A volta dos que não foram"
+// meuLivro.editora = "Google"
+// console.table({meuLivro})
+
+class Form {
+    constructor(formDOM) {
+        this._formDOM = formDOM;
+    }
+
+    get formDOM() { return this._formDOM }
+    set formDOM(newForm) { this._formDOM = newForm }
+
+    _validateForm(input) {
+        try {
+            if (input.value === "") {
+                throw new Error("Preencha todos os campos!")
+            }
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    _formatDate(input) {
+        try {
+            if (input.type === "date") {
+                const date = input.value;
+                const arrayDate = date.splits('-');
+
+                return `${arrayDate[2]}/${arrayDate[1]}/${arrayDate[0]}`;
+            }
+            throw new Error("Tipo do input inválido!")
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    getData() {
+        try {
+            const formInputs = document.querySelectorAll(this.formDOM + " input");
+            const inputSData = {};
+
+            formInputs.forEach(input => {
+                this._validateForm(input);
+
+                if (input.type === "date") {
+                    input.value = this._formatDate(input);
+                }
+
+                inputSData[input.name] = input.value;
+            })
+
+            this.formData = inputSData;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+}
