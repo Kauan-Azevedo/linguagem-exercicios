@@ -184,4 +184,3 @@ formBtn.addEventListener('click', (e) => {
 
     db.addNewBook(livro);
 });
-
