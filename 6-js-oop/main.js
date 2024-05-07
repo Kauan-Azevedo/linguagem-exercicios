@@ -1,47 +1,47 @@
 // Crie a classe abaixo usando Encapsulamento.
 
-// class Conta {
-//     constructor(numeroAgencia, numeroConta, saldoInicial) {
-//         this._numeroAgencia = numeroAgencia;
-//         this._numeroConta = numeroConta;
-//         this._saldo = saldoInicial;
-//     }
+class Conta {
+    constructor(numeroAgencia, numeroConta, saldoInicial) {
+        this._numeroAgencia = numeroAgencia;
+        this._numeroConta = numeroConta;
+        this._saldo = saldoInicial;
+    }
 
-//     get saldo() {
-//         return this._saldo;
-//     }
+    get saldo() {
+        return this._saldo;
+    }
 
-//     depositar(valor) {
-//         try {
-//             if (valor <= 0) {
-//                 throw new Error("O valor do depósito deve ser maior que zero.");
-//             }
-//             this._saldo += valor;
-//             console.log(`Depósito de ${valor} realizado com sucesso. Novo saldo: ${this._saldo}`);
-//         } catch (erro) {
-//             console.log("Ocorreu um erro ao depositar: " + erro.message);
-//         }
-//     }
+    depositar(valor) {
+        try {
+            if (valor <= 0) {
+                throw new Error("O valor do depósito deve ser maior que zero.");
+            }
+            this._saldo += valor;
+            console.log(`Depósito de ${valor} realizado com sucesso. Novo saldo: ${this._saldo}`);
+        } catch (erro) {
+            console.log("Ocorreu um erro ao depositar: " + erro.message);
+        }
+    }
 
-//     sacar(valor) {
-//         try {
-//             if (valor <= 0) {
-//                 throw new Error("O valor do saque deve ser maior que zero.");
-//             }
-//             if (valor > this._saldo) {
-//                 throw new Error("Saldo insuficiente para realizar o saque.");
-//             }
-//             this._saldo -= valor;
-//             console.log(`Saque de ${valor} realizado com sucesso. Novo saldo: ${this._saldo}`);
-//         } catch (erro) {
-//             console.log("Ocorreu um erro ao sacar: " + erro.message);
-//         }
-//     }
+    sacar(valor) {
+        try {
+            if (valor <= 0) {
+                throw new Error("O valor do saque deve ser maior que zero.");
+            }
+            if (valor > this._saldo) {
+                throw new Error("Saldo insuficiente para realizar o saque.");
+            }
+            this._saldo -= valor;
+            console.log(`Saque de ${valor} realizado com sucesso. Novo saldo: ${this._saldo}`);
+        } catch (erro) {
+            console.log("Ocorreu um erro ao sacar: " + erro.message);
+        }
+    }
 
-//     toString() {
-//         return `Agência: ${this._numeroAgencia}, Conta: ${this._numeroConta}, Saldo: ${this._saldo}`;
-//     }
-// }
+    toString() {
+        return `Agência: ${this._numeroAgencia}, Conta: ${this._numeroConta}, Saldo: ${this._saldo}`;
+    }
+}
 
 // const minhaConta = new Conta("001", "123456-7", 1000);
 // minhaConta.depositar(550)
@@ -71,12 +71,6 @@ class Livro {
     }
 }
 
-// const meuLivro = new Livro("A volta dos que n foram", "Eu", "Eu LTDA", 2005);
-// console.log(meuLivro.toString())
-// meuLivro.titulo = "A volta dos que não foram"
-// meuLivro.editora = "Google"
-// console.table({meuLivro})
-
 class Form {
     constructor(formDOM) {
         this._formDOM = formDOM;
@@ -95,38 +89,99 @@ class Form {
         }
     }
 
-    _formatDate(input) {
-        try {
-            if (input.type === "date") {
-                const date = input.value;
-                const arrayDate = date.splits('-');
-
-                return `${arrayDate[2]}/${arrayDate[1]}/${arrayDate[0]}`;
-            }
-            throw new Error("Tipo do input inválido!")
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
-
     getData() {
         try {
             const formInputs = document.querySelectorAll(this.formDOM + " input");
-            const inputSData = {};
+            const inputsData = {};
 
             formInputs.forEach(input => {
                 this._validateForm(input);
 
-                if (input.type === "date") {
-                    input.value = this._formatDate(input);
-                }
-
-                inputSData[input.name] = input.value;
+                inputsData[input.name] = input.value;
             })
 
-            this.formData = inputSData;
+            this.formData = inputsData;
+            return inputsData;
         } catch (error) {
             throw new Error(error.message);
         }
     }
 }
+
+class Database {
+    constructor() {
+        this._bookTable = "bookTable"
+    }
+
+    get bookTable() { return this._bookTable }
+    set bookTable(newBookTable) { this._bookTable = newBookTable }
+    
+    checkDb() {
+        const report = {};
+        const books = localStorage.getItem(this.booksTable);
+        const book = localStorage.getItem(this.lastBookTable);
+
+        if(books === null || books === '') {
+            report['books'] = false;
+        }
+        if(book === null || book === '') {
+            report['lastBook'] = false;
+        }
+        return report;
+    }
+
+    createTable(tableName) {
+        localStorage.setItem(tableName, []);
+    }
+
+    getData() {
+        try {
+            const data = localStorage.getItem(this.bookTable) || '[]';
+        
+            return JSON.parse(data);
+        }
+        catch (error) {
+            error.message = 'Erro ao pegar os dados!';
+            return display_error(error.message);
+        }
+    }
+
+    addNewBook(book) {
+        try {
+            const report = this.checkDb();
+            let bookshelf = this.getData();
+
+            for(const [key, value] of Object.entries(report)) {
+                if(!value) {
+                    this.createTable(key);
+                    // throw new Error("Tabelas não criadas!");
+                }
+            };
+
+            bookshelf.push(book)
+
+            localStorage.setItem(this.bookTable, JSON.stringify(bookshelf));
+
+        } catch (error) {
+            alert(error.message);
+            console.error(error.message);
+        }
+    }
+}
+
+const formBtn = document.querySelector('button[type="submit"');
+
+formBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const form = new Form(".form-cadastro");
+    const db = new Database();
+
+    let livro = new Livro();
+    for(const [key,value] of Object.entries(form.getData())) {
+        livro[key] = value;
+    }
+
+    db.addNewBook(livro);
+});
+
