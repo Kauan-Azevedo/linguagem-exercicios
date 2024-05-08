@@ -30,47 +30,61 @@ class Lista {
     }
 
     gerarTabela() {
-        const dados = this.getDataBulk(["carrosLista", "caminhaoLista"]);
-        if (Object.keys(dados).length === 0) {
-            throw new Error("Nenhum dado encontrado!");
-        }
-        const tabela = document.createElement('table');
-        const cabecalho = document.createElement('thead');
-        const corpo = document.createElement('tbody');
-
-        const colunas = {};
-        for (let lista in dados) {
-            for (let item of dados[lista]) {
-                for (let propriedade in item) {
-                    colunas[propriedade] = true;
+        try {
+            const dados = this.getDataBulk(["carrosLista", "caminhaoLista"]);
+            if (Object.values(dados).every(array => array.length === 0)) {
+                throw new Error("Nenhum dado encontrado!");
+            }            
+            const tabela = document.createElement('table');
+            const cabecalho = document.createElement('thead');
+            const corpo = document.createElement('tbody');
+    
+            const colunas = {};
+            for (let lista in dados) {
+                for (let item of dados[lista]) {
+                    for (let propriedade in item) {
+                        colunas[propriedade] = true;
+                    }
                 }
             }
-        }
-
-        const cabecalhoLinha = document.createElement('tr');
-        for (let coluna in colunas) {
-            const th = document.createElement('th');
-            th.textContent = coluna;
-            cabecalhoLinha.appendChild(th);
-        }
-        cabecalho.appendChild(cabecalhoLinha);
-        tabela.appendChild(cabecalho);
-
-        for (let lista in dados) {
-            for (let item of dados[lista]) {
-                const tr = document.createElement('tr');
-                for (let coluna in colunas) {
-                    const td = document.createElement('td');
-                    td.textContent = item[coluna] || '';
-                    tr.appendChild(td);
-                }
-                corpo.appendChild(tr);
+    
+            const cabecalhoLinha = document.createElement('tr');
+            for (let coluna in colunas) {
+                const th = document.createElement('th');
+                th.textContent = coluna;
+                cabecalhoLinha.appendChild(th);
             }
+            cabecalho.appendChild(cabecalhoLinha);
+            tabela.appendChild(cabecalho);
+    
+            for (let lista in dados) {
+                for (let item of dados[lista]) {
+                    const tr = document.createElement('tr');
+                    for (let coluna in colunas) {
+                        const td = document.createElement('td');
+                        td.textContent = item[coluna] || '';
+                        tr.appendChild(td);
+                    }
+                    corpo.appendChild(tr);
+                }
+            }
+            tabela.appendChild(corpo);
+    
+            const listagemDOM = document.querySelector(".listagem");
+            console.log(tabela)
+            listagemDOM.appendChild(tabela)
+        } catch (error) {
+            console.error(error);
         }
-        tabela.appendChild(corpo);
+    }
 
-        document.body.appendChild(tabela);
-        console.log(tabela);
+    updateTabela(tableDOM) {
+        const tabela = document.querySelector(tableDOM);
+        // const corpo = tabela.querySelector("tbody");
+        // corpo.innerHTML = '';
+        tabela.remove();
+        
+        this.gerarTabela();
     }
 
 }

@@ -45,20 +45,21 @@ section form {
     padding: .5rem .4rem;
 
     width: 256px;
-    background-color: chocolate;
-    color: brown;
+    background-color: black;
+    color: #f3f3f3;
     border-radius: 1rem;
-}
-
-section ul {
 }
 
 section form input {
     border-radius: 1rem;
-    padding: 0 .5rem;
+    padding: .2rem .5rem;
     background-color: transparent;
     border: 2px solid aqua;
     color: #f3f3f3;
+}
+
+section form input::placeholder {
+    color: #f3f3f3cf;
 }
 
 section form button {

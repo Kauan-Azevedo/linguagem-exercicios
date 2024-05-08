@@ -33,6 +33,9 @@ carroBtn.addEventListener('click', (e) => {
     const carroData = form.getData();
     const carro = new Carro(carroData.nome, carroData.marca, carroData.portas);
     db.addNewItem(carro);
+
+    const lista = new Lista(".listagem");
+    lista.updateTabela(".listagem table");
 });
 
 caminhaoBtn.addEventListener('click', (e) => {
@@ -42,7 +45,12 @@ caminhaoBtn.addEventListener('click', (e) => {
     const caminhaoData = form.getData();
     const caminhao = new Caminhao(caminhaoData.nome, caminhaoData.marca, caminhaoData.eixos);
     db.addNewItem(caminhao);
+
+    const lista = new Lista(".listagem");
+    lista.updateTabela(".listagem table");
 });
 
-const listagem = new Lista();
-listagem.gerarTabela();
+document.addEventListener("DOMContentLoaded", function() {
+    const lista = new Lista(".listagem");
+    lista.gerarTabela();
+});
