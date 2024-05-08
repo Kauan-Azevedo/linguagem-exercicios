@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <main>
+        <section class="carros">
+            <h2>Carro</h2>
+            <form class="add-carro">
+                <input name="nome" type="text" required placeholder="Nome" autocomplete="off">
+                <input name="marca" type="text" required placeholder="Marca" autocomplete="off">
+                <input name="portas" type="number" required placeholder="Portas" autocomplete="off">
+                <button type="submit">Criar</button>
+            </form>
+        </section>
+        <section class="caminhao">
+            <h2>Caminhao</h2>
+            <form class="add-caminhao">
+                <input name="nome" type="text" required placeholder="Nome" autocomplete="off">
+                <input name="marca" type="text" required placeholder="Marca" autocomplete="off">
+                <input name="eixo" type="number" required placeholder="Eixo" autocomplete="off">
+                <button type="submit">Criar</button>
+            </form>
+        </section>
+        <section>
+            <h2>Lista</h2>
+            <ul class="listagem">
+                <li>
+                    Nome: <span>Lorem</span>
+                    <br/>
+                    Marca: <span>Ipsum</span>
+                    <br/>
+                    Portas/Eixos: <span>20</span>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
