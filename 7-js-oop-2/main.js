@@ -43,3 +43,6 @@ caminhaoBtn.addEventListener('click', (e) => {
     const caminhao = new Caminhao(caminhaoData.nome, caminhaoData.marca, caminhaoData.eixos);
     db.addNewItem(caminhao);
 });
+
+const listagem = new Lista();
+listagem.gerarTabela();
