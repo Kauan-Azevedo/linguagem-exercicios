@@ -18,7 +18,7 @@ class Form {
             inputsData[input.name] = input.value;
         });
 
-        console.log(inputsData);
+        // console.log(inputsData);
         return inputsData;
     }
 }

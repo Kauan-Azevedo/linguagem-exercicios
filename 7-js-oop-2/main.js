@@ -1,6 +1,6 @@
 import Form from "../utils/form.js";
 import Database from "../utils/database.js";
-import Lista from "../utils/listagem.js";   
+import Lista from "../utils/listagem.js";
 
 class Veiculo {
     constructor(nome, marca) {

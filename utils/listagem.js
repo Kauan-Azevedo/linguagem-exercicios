@@ -33,7 +33,8 @@ class Lista {
         try {
             const dados = this.getDataBulk(["carrosLista", "caminhaoLista"]);
             if (Object.values(dados).every(array => array.length === 0)) {
-                throw new Error("Nenhum dado encontrado!");
+                console.log("Nenhum dado!");
+                // throw new Error("Nenhum dado encontrado!");
             }            
             const tabela = document.createElement('table');
             const cabecalho = document.createElement('thead');
@@ -71,7 +72,7 @@ class Lista {
             tabela.appendChild(corpo);
     
             const listagemDOM = document.querySelector(".listagem");
-            console.log(tabela)
+            // console.log(tabela)
             listagemDOM.appendChild(tabela)
         } catch (error) {
             console.error(error);

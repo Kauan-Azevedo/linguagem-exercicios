@@ -26,7 +26,7 @@ class Database {
     }
 
     addNewItem(tableItem) {
-        console.log(tableItem);
+        // console.log(tableItem);
         if (this.checkDb()) {
             this.createTable();
         }
