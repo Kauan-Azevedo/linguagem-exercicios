@@ -10,6 +10,19 @@ class Scenario {
         console.log(this.enemy.getStats());
     }
 
+    flee() {
+        let rng = Math.floor(Math.random() * 10);
+        console.log("Flee");
+
+        if(rng <= 5 ) {
+            console.log("Success");
+            return true;
+        }
+
+        console.log("Failed")
+        return false;
+    }
+
     end() {
         console.log('The battle has ended!');
         console.log(this.player.getStats());
@@ -17,7 +30,7 @@ class Scenario {
     }
 
     playerTurnChoices() {
-        return ['attack', 'heal'];
+        return ['attack', 'heal', "flee"];
     }
 
     enemyTurnRandomChoice() {
@@ -53,6 +66,10 @@ class Scenario {
                 this.playerAttacks();
             } else if (playerAction === 'heal') {
                 this.playerHeals();
+            } else if (playerAction === 'flee') {
+                if (this.flee()) {
+                    break
+                }
             }
 
             if (enemyAction === 'attack') {

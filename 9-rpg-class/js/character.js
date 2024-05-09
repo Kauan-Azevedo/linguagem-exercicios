@@ -11,7 +11,7 @@ class Character {
     }
 
     heal() {
-        this.health += 10;
+        this.health += 5;
     }
 
     defend() {
