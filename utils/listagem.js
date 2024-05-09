@@ -86,7 +86,6 @@ class Lista {
         
         this.gerarTabela();
     }
-
 }
 
 export default Lista;
